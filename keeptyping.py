@@ -49,30 +49,22 @@ def playNote(string):
 pygame.init()
 pygame.mixer.init()
 
-Mario = arrayCreator("song.txt")
+song = arrayCreator("song.txt")
 
-for element in Mario:
-    print(element)
-
-#Mario=['E4','E4','E4','C4','E4','G4', 'C5', 'G4', 'E4', 'A4', 'B4', 'Bb4', 'A4', 'G4', 'C5', 'E5', 'A5', 'F5', 'G4', 'E5', 'E5', 'F5', 'D5', 'C5', 'G4', 'E4', 'A4', 'B4', 'Bb4', 'A4', 'G4', 'E4', 'D4', 'C4', 'C4', 'C4','C4','C4','C4','C4', 'D4', 'E4', 'C4', 'A3', 'G3', 'C4','C4','C4','C4', 'D4', 'E4', 'C4','C4','C4','C4', 'D4', 'E4', 'C4', 'A3', 'G3', 'E4', 'E4', 'E4', 'C4', 'E4', 'G4' ]
-
+#Input from keyboard event. This is why this program needs root permissions
 dev = InputDevice("/dev/input/by-path/platform-i8042-serio-0-event-kbd")
-count = 0
+
 noteNum = 0
 while True:
     r,w,x = select([dev], [], [])
     for event in dev.read():
+        #Next two lines take neccessary info from the event. To see more info from event, print event.
         code = str(event).split(" ")[4]
         current = str(event).split("val")[1]
-        count += 1
         if (code != '00,' and current == " 01"):
-            print(current)
-            foo = "notes/" + Mario[noteNum] + ".aiff"
-            print(Mario[noteNum])
+            foo = "notes/" + song[noteNum] + ".aiff"
             s = pygame.mixer.Sound(foo)
             s.play()
             noteNum += 1
-            if (noteNum >= len(Mario)):
+            if (noteNum >= len(song)):
                 noteNum = 0; #repeat
-        if (count == 6):
-            count = 0
