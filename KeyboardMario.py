@@ -1,6 +1,7 @@
 from evdev import InputDevice
 from select import select
 from numbers import Number
+import sys
 import pygame
 import re
 
@@ -25,7 +26,7 @@ def arrayCreator(filename):
             elif(sharp == True):
                 song.append(c + "sharp")
                 sharp = False
-            elif(c.isdigit() or c==' ' or c=='\n' or c=='/' or c=='=' or c=="|" or c=="_" or c=="^" or c=="(" or c=="'" or c=="z"):
+            elif(c.isdigit() or c==' ' or c=='\n' or c=='/' or c=='=' or c=="|" or c=="_" or c=="^" or c=="(" or c=="'" or c=="z" or c=='"' or c=="m"):
                 pass
             else:
                 song.append(c)
@@ -49,7 +50,10 @@ def playNote(string):
 pygame.init()
 pygame.mixer.init()
 
-song = arrayCreator("song.txt")
+if len(sys.argv) > 1:
+    song = arrayCreator(sys.argv[1])
+else:
+    song = arrayCreator("song.txt")
 
 #Input from keyboard event. This is why this program needs root permissions
 dev = InputDevice("/dev/input/by-path/platform-i8042-serio-0-event-kbd")
