@@ -8,7 +8,7 @@ import re
 def arrayCreator(filename):
     f = open(filename, "r") #Readonly
     end = False
-    pattern = re.compile("K:*")
+    pattern = re.compile("K:*") #Pattern will store the Key value
     while(not end):
         if(pattern.match(f.readline())):
             end = True
@@ -16,17 +16,22 @@ def arrayCreator(filename):
     nextLine = f.readline()
     flat = False
     sharp = False
+    isCord = False
     song = []
     while(nextLine != ""):
         for c in nextLine:
-
-            if(flat == True):
+            if(c == '"'): #Either the beging or end of Cord
+                if(isCord == True): #End of Cord
+                    isCord = False;
+                else:               #Begnning of Cord
+                    isCord = True;
+            elif(flat == True):
                 song.append(c + "b")
                 flat = False
             elif(sharp == True):
                 song.append(c + "sharp")
                 sharp = False
-            elif(c.isdigit() or c==' ' or c=='\n' or c=='/' or c=='=' or c=="|" or c=="_" or c=="^" or c=="(" or c=="'" or c=="z" or c=='"' or c=="m"):
+            elif(c.isdigit() or isCord or c==' ' or c=='\n' or c=='/' or c=='=' or c=="|" or c=="_" or c=="^" or c=="(" or c=="'" or c=="z" or c=="m"):
                 pass
             else:
                 song.append(c)
