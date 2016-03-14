@@ -46,6 +46,14 @@ def arrayCreator(filename):
 
     return song
 
+def isModifier(key):
+    key = key[0:2]  #get rid of ',' at end of key
+    key = int(key)
+    #L and R        Shift, Ctrl,   Alt,     Win, Caps on/off
+    if(key in [42, 54, 29, 97, 56, 100, 125, 1, 58]):
+        return True
+    else:
+        return False
 
 def playNote(string):
     #s = pygame.mixer.Sound("notes/" + string + ".aiff")
@@ -70,7 +78,7 @@ while True:
         #Next two lines take neccessary info from the event. To see more info from event, print event.
         code = str(event).split(" ")[4]
         current = str(event).split("val")[1]
-        if (code != '00,' and current == " 01"):
+        if ((not isModifier(code)) and code != '00,' and current == " 01"):
             foo = "notes/" + song[noteNum] + ".aiff"
             s = pygame.mixer.Sound(foo)
             s.play()
