@@ -47,10 +47,11 @@ def arrayCreator(filename):
     return song
 
 def isModifier(key): #passed in parameter is keycode
-    key = key[0:2]  #get rid of ',' at end of key
+    key = key[0:len(key)-1]  #get rid of ',' at end of key
     key = int(key)
-    #L and R        Shift, Ctrl,   Alt,     Win, Caps on/off
-    if(key in [42, 54, 29, 97, 56, 100, 125, 1, 58]):
+    #L/R,on/off Shift, Ctrl,   Alt,     Win, Esc, Caps
+    print(key)
+    if(key in [42, 54, 29, 97, 56, 100, 125, 0, 4, 1, 58]):
         return True
     else:
         return False
@@ -66,7 +67,8 @@ else:
     song = arrayCreator("song.txt")
 
 #Input from keyboard event. This is why this program needs root permissions
-dev = InputDevice("/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+#dev = InputDevice("/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+dev = InputDevice("/dev/input/event0")
 
 noteNum = 0
 while True:
