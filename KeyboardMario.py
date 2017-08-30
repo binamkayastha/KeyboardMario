@@ -50,7 +50,6 @@ def isModifier(key): #passed in parameter is keycode
     key = key[0:len(key)-1]  #get rid of ',' at end of key
     key = int(key)
     #L/R,on/off Shift, Ctrl,   Alt,     Win, Esc, Caps
-    print(key)
     if(key in [42, 54, 29, 97, 56, 100, 125, 0, 4, 1, 58]):
         return True
     else:
