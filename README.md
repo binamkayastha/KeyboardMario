@@ -1,4 +1,4 @@
-# Keyboard Mario [Temporarily Abandoned | Open for Contribution]
+# Keyboard Mario [Abandoned]
 
 A music program which plays a notes of a song each time a letter is placed. Currently works on Linux, though the program may need to be modified depending on where the keyboard event is being outputted to.
 
